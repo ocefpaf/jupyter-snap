@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Project Jupyter
+Comment=Jupyter metapackage
+Exec=jupyter notebook
+Icon=${SNAP}/meta/gui/jupyter.png
+Terminal=true
+Type=Application

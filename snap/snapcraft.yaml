@@ -1,0 +1,52 @@
+name: jupyter
+base: core18
+version: '1.0.0'
+title: Project Jupyter
+summary: Jupyter metapackage. Install all the Jupyter components in one go.
+description: |
+  The Jupyter Notebook is an open-source web application that allows you to create and share
+  documents that contain live code, equations, visualizations and narrative text.
+  Uses include: data cleaning and transformation, numerical simulation, statistical modeling,
+  data visualization, machine learning, and much more.
+type: app
+license: BSD-3-Clause
+
+grade: stable
+confinement: strict
+
+architectures: [amd64]
+
+environment:
+  PYTHONUSERBASE: "${SNAP_USER_COMMON}"
+  PIP_USER: "1"
+  PATH: "$SNAP_USER_COMMON/bin:$PATH"
+
+apps:
+  jupyter:
+    command: bin/python $SNAP/bin/jupyter
+    plugs:
+      - network
+      - network-bind
+      - home
+      - desktop
+  ipython:
+    command: bin/python $SNAP/bin/ipython
+    plugs:
+      - network
+      - network-bind
+      - home
+      - desktop
+  nbconvert:
+    command: bin/python $SNAP/bin/jupyter-nbconvert
+    plugs:
+      - network
+      - network-bind
+      - home
+      - desktop
+
+parts:
+  my-part:
+    plugin: x_conda
+    source: JUPYTER
+    stage:
+    - -share/jupyter/kernels/python3
